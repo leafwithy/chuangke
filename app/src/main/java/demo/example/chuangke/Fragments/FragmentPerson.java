@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import demo.example.ck.R;
+import demo.example.chuangke.R;
+
 
 public class FragmentPerson extends Fragment {
     @Nullable

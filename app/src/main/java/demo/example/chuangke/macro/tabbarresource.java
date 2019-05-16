@@ -1,6 +1,7 @@
 package demo.example.chuangke.macro;
 
-import demo.example.ck.R;
+
+import demo.example.chuangke.R;
 
 public class tabbarresource {
     public static final String BottomItem1 = "首页";
