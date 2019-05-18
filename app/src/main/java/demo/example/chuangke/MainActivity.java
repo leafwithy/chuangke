@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+
 import com.hjm.bottomtabbar.BottomTabBar;
 
 import demo.example.chuangke.Fragments.FragmentPerson;
@@ -26,5 +27,6 @@ public class MainActivity extends AppCompatActivity {
                 .addTabItem(tabbarresource.BottomItem2, tabbarresource.BottomItemimage4, Fragmentidea.class)
                 .addTabItem(tabbarresource.BottomItem3, tabbarresource.BottomItemimage6, FragmentPerson.class)
                 .isShowDivider(false);
+
     }
 }
