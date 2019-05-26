@@ -1,5 +1,6 @@
 package demo.example.chuangke.Fragments;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,10 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.example.chuangke.Adapter.RecyclerAdapter;
+import demo.example.chuangke.Li_activity;
 import demo.example.chuangke.Loader.GlideImageLoader;
+import demo.example.chuangke.New_activity;
 import demo.example.chuangke.R;
+import demo.example.chuangke.Study_activity;
 
-public class FragmentShouye extends Fragment {
+public class FragmentShouye extends Fragment implements View.OnClickListener {
     List<String> images = new ArrayList<>();
     String[] items = new String[]{
         "风声","雨声","读书声","声声入耳"
@@ -64,6 +68,7 @@ public class FragmentShouye extends Fragment {
         btn1.setBackgroundResource(R.drawable.rumenshouce);
         btn2.setBackgroundResource(R.drawable.xinlulicheng);
         btn3.setBackgroundResource(R.drawable.zuixinzixun);
+        btn1.setOnClickListener(this);
 
     }
     private void initData(){
@@ -71,5 +76,19 @@ public class FragmentShouye extends Fragment {
         images.add("http://image14.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907013518839623.jpg");
         images.add("http://image14.m1905.cn/uploadfile/2018/0906/thumb_1_1380_460_20180906040153529630.jpg");
         images.add("http://image13.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907114844929630.jpg");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.rumenshouce:
+                startActivity(new Intent(getActivity(),Study_activity.class));
+                break;
+            case R.id.xinlulicheng:
+                startActivity(new Intent(getActivity(), Li_activity.class));
+                break;
+            case R.id.zuixinzixun:
+                startActivity(new Intent(getActivity(), New_activity.class));
+        }
     }
 }
