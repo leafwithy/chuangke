@@ -30,7 +30,7 @@ public class fragment_new extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragmentidea_new,container,false);
-        recyclerView = v.findViewById(R.id.recycleV);
+        recyclerView = v.findViewById(R.id.recycleV1);
         initView();
         return v;
     }

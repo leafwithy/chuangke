@@ -4,16 +4,48 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.SimpleAdapter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import demo.example.chuangke.Adapter.RecyclerAdapter;
 import demo.example.chuangke.R;
 
 public class fragment_hot extends Fragment {
+    String [] items = new String[]{
+            "家事","国事","天下事","事事顺心"
+    };
+    RecyclerView recyclerView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragmentidea_hot,container,false);
+        View v = inflater.inflate(R.layout.fragmentidea_hot,container,false);
+        recyclerView = v.findViewById(R.id.recycleV2);
+        initView();
+        return v;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+    private void initView(){
+        recyclerView.setAdapter(new RecyclerAdapter(getActivity(),items));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+    }
+    private void initData(){
+    }
+
 }
+

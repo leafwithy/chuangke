@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="shouye"/>
+    <com.youth.banner.Banner
+        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:id="@+id/banner"/>
+    <!--这里是图片轮播器 第二天尝试-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#e0e0e0"
+        android:text="推荐"
+        android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:paddingStart="80dp"
+        android:paddingEnd="80dp"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/rumenshouce"
+            android:layout_weight="1"
+
+            android:layout_gravity="center_vertical"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/xinlulicheng"
+            android:layout_marginStart="25dp"
+            android:layout_weight="1"
+
+            android:layout_gravity="center_vertical"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="25dp"
+
+            android:id="@+id/zuixinzixun"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#e0e0e0"
+        android:text="发现"
+        android:gravity="center"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleV_shouye"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>
