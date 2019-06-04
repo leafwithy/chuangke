@@ -10,27 +10,31 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import demo.example.chuangke.Adapter.RecyclerAdapter;
+import demo.example.chuangke.Adapter.RecyclerAdapter_hot;
 import demo.example.chuangke.R;
+import demo.example.chuangke.Reality.Hot_issues;
 
 public class fragment_hot extends Fragment {
-    String [] items = new String[]{
-            "家事","国事","天下事","事事顺心"
-    };
+    List<Hot_issues> items = new ArrayList<>();
     RecyclerView recyclerView;
+
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return 得到一个fragment
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragmentidea_hot,container,false);
         recyclerView = v.findViewById(R.id.recycleV2);
+        initData();
         initView();
         return v;
     }
@@ -40,11 +44,12 @@ public class fragment_hot extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
     private void initView(){
-        recyclerView.setAdapter(new RecyclerAdapter(getActivity(),items));
+        recyclerView.setAdapter(new RecyclerAdapter_hot(getActivity(),items));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
     }
     private void initData(){
+        items.add(new Hot_issues(0,null,0,0,null,null,R.drawable.shouyeblue));
     }
 
 }

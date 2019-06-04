@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/textView_new">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_title_items"
+        android:textSize="25sp"
+        android:text="开发app:为有想法的人和有技术的人搭建桥梁"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_content_items"
+        android:textSize="15sp"
+        android:text="这个想法源于我自己自身遇到的问题，我是一个很敢想的人，但是我欠缺技术基础，也在寻找志同道合的同伴方面有很大的问题，所有我希望利用app搭建一个平台，交流想法，组队，学习"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="12sp"
+        android:layout_height="match_parent"
+        android:id="@+id/new_name_items"
+        android:layout_alignParentLeft="true"
+        android:text="姚慢慢"/>
 
-</TextView>
+        <TextView
+            android:id="@+id/new_time_items"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="1小时前"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</LinearLayout>

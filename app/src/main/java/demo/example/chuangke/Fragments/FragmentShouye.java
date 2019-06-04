@@ -1,7 +1,6 @@
 package demo.example.chuangke.Fragments;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,18 +20,17 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.example.chuangke.Adapter.RecyclerAdapter;
+import demo.example.chuangke.Adapter.RecyclerAdapter_hot;
 import demo.example.chuangke.Li_activity;
 import demo.example.chuangke.Loader.GlideImageLoader;
 import demo.example.chuangke.New_activity;
 import demo.example.chuangke.R;
+import demo.example.chuangke.Reality.Hot_issues;
 import demo.example.chuangke.Study_activity;
 
 public class FragmentShouye extends Fragment implements View.OnClickListener {
     List<String> images = new ArrayList<>();
-    String[] items = new String[]{
-        "风声","雨声","读书声","声声入耳"
-    };
+    List<Hot_issues> items = new ArrayList<>();
     private RecyclerView recyclerView;
     private Button btn1,btn2,btn3;
     @Nullable
@@ -62,7 +60,7 @@ public class FragmentShouye extends Fragment implements View.OnClickListener {
     }
 
     private void initView(){
-        recyclerView.setAdapter(new RecyclerAdapter(getActivity(),items));
+        recyclerView.setAdapter(new RecyclerAdapter_hot(getActivity(),items));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         btn1.setBackgroundResource(R.drawable.rumenshouce);
@@ -72,7 +70,7 @@ public class FragmentShouye extends Fragment implements View.OnClickListener {
 
     }
     private void initData(){
-
+        items.add(new Hot_issues(0,null,0,0,null,null,R.drawable.ic_launcher_background));
         images.add("http://image14.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907013518839623.jpg");
         images.add("http://image14.m1905.cn/uploadfile/2018/0906/thumb_1_1380_460_20180906040153529630.jpg");
         images.add("http://image13.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907114844929630.jpg");

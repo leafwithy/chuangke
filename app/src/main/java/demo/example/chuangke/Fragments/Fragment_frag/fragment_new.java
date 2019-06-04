@@ -10,27 +10,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import demo.example.chuangke.Adapter.RecyclerAdapter;
+import demo.example.chuangke.Adapter.RecycleAdapter_new;
+import demo.example.chuangke.Adapter.RecyclerAdapter_hot;
 import demo.example.chuangke.R;
+import demo.example.chuangke.Reality.Hot_issues;
+import demo.example.chuangke.Reality.New_issues;
 
 public class fragment_new extends Fragment {
-    String [] items = new String[]{
-            "你好","我好","才是","真的好"
-    };
+    List<New_issues> items = new ArrayList<>();
     RecyclerView recyclerView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragmentidea_new,container,false);
         recyclerView = v.findViewById(R.id.recycleV1);
+        initData();
         initView();
         return v;
     }
@@ -40,11 +38,13 @@ public class fragment_new extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
     private void initView(){
-        recyclerView.setAdapter(new RecyclerAdapter(getActivity(),items));
+        recyclerView.setAdapter(new RecycleAdapter_new(getActivity(),items));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
     }
     private void initData(){
+      //  items.add(new New_issues("标题","内容","大哥大","明天"));
+
     }
 
 }
