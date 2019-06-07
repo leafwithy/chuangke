@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,6 @@ public class fragment_hot extends Fragment {
     List<Hot_issues> items = new ArrayList<>();
     RecyclerView recyclerView;
 
-    /**
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return 得到一个fragment
-     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,9 +38,17 @@ public class fragment_hot extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
     private void initView(){
-        recyclerView.setAdapter(new RecyclerAdapter_hot(getActivity(),items));
+        RecyclerAdapter_hot rc = new RecyclerAdapter_hot(getActivity(),items);
+        rc.setOnItemClickListener(new RecyclerAdapter_hot.OnItemClickListener() {
+            @Override
+            public void OnItemClick(View view, String str) {
+                Toast.makeText(getContext(),str,Toast.LENGTH_SHORT).show();
+            }
+        });
+        recyclerView.setAdapter(rc);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+
     }
     private void initData(){
         items.add(new Hot_issues(0,null,0,0,null,null,R.drawable.shouyeblue));

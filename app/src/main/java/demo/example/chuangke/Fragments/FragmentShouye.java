@@ -20,13 +20,13 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import demo.example.chuangke.Activity_shouye_btn.exec_btnac;
+import demo.example.chuangke.Activity_shouye_btn.learn_btnac;
+import demo.example.chuangke.Activity_shouye_btn.new_btnac;
 import demo.example.chuangke.Adapter.RecyclerAdapter_hot;
-import demo.example.chuangke.Li_activity;
 import demo.example.chuangke.Loader.GlideImageLoader;
-import demo.example.chuangke.New_activity;
 import demo.example.chuangke.R;
 import demo.example.chuangke.Reality.Hot_issues;
-import demo.example.chuangke.Study_activity;
 
 public class FragmentShouye extends Fragment implements View.OnClickListener {
     List<String> images = new ArrayList<>();
@@ -67,7 +67,8 @@ public class FragmentShouye extends Fragment implements View.OnClickListener {
         btn2.setBackgroundResource(R.drawable.xinlulicheng);
         btn3.setBackgroundResource(R.drawable.zuixinzixun);
         btn1.setOnClickListener(this);
-
+        btn2.setOnClickListener(this);
+        btn3.setOnClickListener(this);
     }
     private void initData(){
         items.add(new Hot_issues(0,null,0,0,null,null,R.drawable.ic_launcher_background));
@@ -80,13 +81,13 @@ public class FragmentShouye extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rumenshouce:
-                startActivity(new Intent(getActivity(),Study_activity.class));
+                startActivity(new Intent(getActivity(), learn_btnac.class));
                 break;
             case R.id.xinlulicheng:
-                startActivity(new Intent(getActivity(), Li_activity.class));
+                startActivity(new Intent(getActivity(), exec_btnac.class));
                 break;
             case R.id.zuixinzixun:
-                startActivity(new Intent(getActivity(), New_activity.class));
+                startActivity(new Intent(getActivity(), new_btnac.class));
         }
     }
 }

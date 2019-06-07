@@ -1,13 +1,15 @@
-package demo.example.chuangke;
+package demo.example.chuangke.Activity_shouye_btn;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-public class Li_activity extends Activity {
+import demo.example.chuangke.R;
+
+public class new_btnac extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ac_xinlulicheng);
+        setContentView(R.layout.ac_zuixinzixun);
     }
 }

@@ -14,8 +14,8 @@
             <category android:name="android.intent.category.LAUNCHER"/>
         </intent-filter>
     </activity>
-        <activity android:name=".New_activity"/>
-        <activity android:name=".Study_activity"/>
-        <activity android:name=".Li_activity"/>
+        <activity android:name=".Activity_shouye_btn.exec_btnac"/>
+        <activity android:name=".Activity_shouye_btn.learn_btnac"/>
+        <activity android:name=".Activity_shouye_btn.new_btnac"/>
     </application>
 </manifest>

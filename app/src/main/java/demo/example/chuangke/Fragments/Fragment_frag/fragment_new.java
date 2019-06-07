@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,14 @@ public class fragment_new extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
     private void initView(){
-        recyclerView.setAdapter(new RecycleAdapter_new(getActivity(),items));
+        RecycleAdapter_new rc = new RecycleAdapter_new(getActivity(),items);
+        rc.setOnItemClickListener(new RecycleAdapter_new.OnItemClickListener() {
+            @Override
+            public void OnItemClick(View v, String str) {
+                Toast.makeText(getContext(),str,Toast.LENGTH_SHORT).show();
+            }
+        });
+        recyclerView.setAdapter(rc);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
     }

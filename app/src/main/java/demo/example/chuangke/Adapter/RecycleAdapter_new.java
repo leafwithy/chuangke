@@ -52,7 +52,7 @@ public class RecycleAdapter_new extends RecyclerView.Adapter<RecycleAdapter_new.
         private TextView textView3;
         private TextView textView4;
 
-        public myViewHolder(@NonNull View itemView) {
+        public myViewHolder(@NonNull final View itemView) {
             super(itemView);
             textView1 = itemView.findViewById(R.id.new_title_items);
             textView2  = itemView.findViewById(R.id.new_content_items);
@@ -63,11 +63,19 @@ public class RecycleAdapter_new extends RecyclerView.Adapter<RecycleAdapter_new.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if(onItemClickListener!=null){
+                        onItemClickListener.OnItemClick(itemView,"哦？");
+                    }
                 }
             });
         }
     }
+    public interface OnItemClickListener{
+        public void OnItemClick(View v,String str);
+    }
+    OnItemClickListener onItemClickListener;
 
-
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 }

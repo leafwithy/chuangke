@@ -2,6 +2,7 @@ package demo.example.chuangke.Adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -54,7 +55,9 @@ public class RecyclerAdapter_hot extends RecyclerView.Adapter<RecyclerAdapter_ho
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if(onItemClickListener!=null){
+                        onItemClickListener.OnItemClick(v,"还有谁?");
+                    }
                 }
             });
         }
@@ -62,8 +65,9 @@ public class RecyclerAdapter_hot extends RecyclerView.Adapter<RecyclerAdapter_ho
     public interface OnItemClickListener{
         public void OnItemClick(View view, String str);
     }
+
     private OnItemClickListener onItemClickListener;
-    private void OnItemClickListener(OnItemClickListener onItemClickListener){
-        this.onItemClickListener = onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener oc){
+        this.onItemClickListener = oc;
     }
 }
