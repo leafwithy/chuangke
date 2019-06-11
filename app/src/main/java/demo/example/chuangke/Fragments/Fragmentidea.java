@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.example.chuangke.Adapter.TitleFragmentPagerAdapter;
+import demo.example.chuangke.adapter.TitleFragmentPagerAdapter;
 import demo.example.chuangke.Fragments.Fragment_frag.fragment_hot;
 import demo.example.chuangke.Fragments.Fragment_frag.fragment_new;
 import demo.example.chuangke.R;
@@ -58,13 +58,14 @@ public class Fragmentidea extends Fragment implements View.OnClickListener{
             }
         });
     }
+
     private void initView(){
         titles.add("热门推荐");
         titles.add("最新动态");
         titles.add("招贤组队");
         fragment.add(new fragment_hot());
         fragment.add(new fragment_new());
-        fragment.add(new fragment_hot());
+        fragment.add(new RecruitListFragment());
     }
     @Override
     public void onClick(View v) {

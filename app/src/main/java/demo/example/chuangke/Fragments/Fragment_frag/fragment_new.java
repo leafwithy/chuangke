@@ -15,10 +15,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.example.chuangke.Adapter.RecycleAdapter_new;
-import demo.example.chuangke.Adapter.RecyclerAdapter_hot;
+import demo.example.chuangke.adapter.RecycleAdapter_new;
 import demo.example.chuangke.R;
-import demo.example.chuangke.Reality.Hot_issues;
 import demo.example.chuangke.Reality.New_issues;
 
 public class fragment_new extends Fragment {
@@ -38,6 +36,7 @@ public class fragment_new extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
     private void initView(){
         RecycleAdapter_new rc = new RecycleAdapter_new(getActivity(),items);
         rc.setOnItemClickListener(new RecycleAdapter_new.OnItemClickListener() {
@@ -50,6 +49,7 @@ public class fragment_new extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
     }
+
     private void initData(){
       //  items.add(new New_issues("标题","内容","大哥大","明天"));
 

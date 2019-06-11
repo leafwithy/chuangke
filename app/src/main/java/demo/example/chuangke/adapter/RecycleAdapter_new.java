@@ -1,4 +1,4 @@
-package demo.example.chuangke.Adapter;
+package demo.example.chuangke.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

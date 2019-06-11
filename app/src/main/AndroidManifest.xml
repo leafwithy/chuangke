@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="demo.example.chuangke">
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
     <activity android:name=".MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
-            <category android:name="android.intent.category.LAUNCHER"/>
-        </intent-filter>
     </activity>
         <activity android:name=".Activity_shouye_btn.exec_btnac"/>
         <activity android:name=".Activity_shouye_btn.learn_btnac"/>
         <activity android:name=".Activity_shouye_btn.new_btnac"/>
+
+        <activity android:name="demo.example.chuangke.activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="demo.example.chuangke.activity.RegisterActivity">
+        </activity>
+        <activity android:name="demo.example.chuangke.activity.CommentActivity">
+        </activity>
+        <activity android:name="demo.example.chuangke.activity.PublishRecruitActivity">
+        </activity>
     </application>
+
 </manifest>
