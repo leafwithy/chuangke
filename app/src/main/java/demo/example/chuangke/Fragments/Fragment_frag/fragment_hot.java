@@ -19,7 +19,7 @@ import com.youth.banner.loader.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.example.chuangke.Adapter.RecyclerAdapter_hot;
+import demo.example.chuangke.adapter.RecyclerAdapter_hot;
 import demo.example.chuangke.R;
 import demo.example.chuangke.Reality.Hot_issues;
 
@@ -41,6 +41,7 @@ public class fragment_hot extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
     private void initView(){
         RecyclerAdapter_hot rc = new RecyclerAdapter_hot(getActivity(),items);
         rc.setOnItemClickListener(new RecyclerAdapter_hot.OnItemClickListener() {
@@ -54,6 +55,7 @@ public class fragment_hot extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
 
     }
+
     private void initData(){
         String str = "http://image14.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907013518839623.jpg";
         items.add(new Hot_issues(0,null,0,0,null,null,str));

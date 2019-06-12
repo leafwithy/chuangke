@@ -23,7 +23,7 @@ import java.util.List;
 import demo.example.chuangke.Activity_shouye_btn.exec_btnac;
 import demo.example.chuangke.Activity_shouye_btn.learn_btnac;
 import demo.example.chuangke.Activity_shouye_btn.new_btnac;
-import demo.example.chuangke.Adapter.RecyclerAdapter_hot;
+import demo.example.chuangke.adapter.RecyclerAdapter_hot;
 import demo.example.chuangke.Loader.GlideImageLoader;
 import demo.example.chuangke.R;
 import demo.example.chuangke.Reality.Hot_issues;

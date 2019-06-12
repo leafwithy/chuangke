@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/register_bg"
+    android:orientation="vertical">
+
+    <!--“注册”标题-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="注册"
+        android:textSize="30dp"
+        android:textColor="#FF0000"
+        />
+
+    <!--账号 栏-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账  号："
+            android:textSize="20sp"
+            android:layout_marginRight="20dp"
+            android:textColor="#0A0A0A"
+            />
+        <EditText
+            android:id="@+id/et_register_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入您的账号"
+            />
+    </LinearLayout>
+
+    <!--密码 栏-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密   码："
+            android:textSize="20sp"
+            android:layout_marginRight="20dp"
+            android:textColor="#0A0A0A"
+            />
+        <EditText
+            android:id="@+id/et_register_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入您的密码"
+            android:inputType="textPassword"
+            />
+    </LinearLayout>
+
+    <!--重新输入密码 栏-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确    认："
+            android:textSize="20sp"
+            android:layout_marginRight="20dp"
+            android:textColor="#0A0A0A"
+            />
+        <EditText
+            android:id="@+id/et_register_repwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请重新输入密码"
+            android:inputType="textPassword"
+            />
+    </LinearLayout>
+
+    <!--注册按钮-->
+    <Button
+        android:id="@+id/btn_register2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:text="注册"
+        android:gravity="center"
+        android:textSize="20sp"
+        />
+
+</LinearLayout>
