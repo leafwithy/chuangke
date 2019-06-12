@@ -12,13 +12,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import demo.example.chuangke.Loader.GlideImageLoader;
 import demo.example.chuangke.R;
 import demo.example.chuangke.Reality.Hot_issues;
 
 public class RecyclerAdapter_hot extends RecyclerView.Adapter<RecyclerAdapter_hot.myViewHolder> {
     private Context context;
     private List<Hot_issues>  itemList;
-
+    private GlideImageLoader imageLoader;
     public RecyclerAdapter_hot(Context context, List<Hot_issues> itemList){
         this.context = context;
         this.itemList = itemList;
@@ -31,10 +32,17 @@ public class RecyclerAdapter_hot extends RecyclerView.Adapter<RecyclerAdapter_ho
         return new myViewHolder(itemView);
     }
 
+    public void setImageLoader(GlideImageLoader imageLoader) {
+        this.imageLoader = imageLoader;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter_hot.myViewHolder holder, int position) {
         holder.textView.setText("01");
-        holder.imageView.setImageResource(itemList.get(position).getImages());
+        if(imageLoader==null){
+            setImageLoader(new GlideImageLoader());
+        }
+        imageLoader.displayImage(context,itemList.get(position).getImages(),holder.imageView);
     }
 
     @Override
