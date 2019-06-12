@@ -1,5 +1,7 @@
 package demo.example.chuangke.Reality;
 
+import android.graphics.Bitmap;
+
 public class Hot_issues {
     public   int hid;
     public   String title;
@@ -7,12 +9,12 @@ public class Hot_issues {
     public   int comment_num;
     public   String content;
     public   String c_tag;
-    public   int images;
+    public   String images;
 
     public Hot_issues() {
     }
 
-    public Hot_issues(int hid , String title , int concern_num, int comment_num, String content, String c_tag, int images) {
+    public Hot_issues(int hid , String title , int concern_num, int comment_num, String content, String c_tag, String images) {
         this.hid  = hid;
         this.title = title;
         this.concern_num = concern_num;
@@ -21,7 +23,7 @@ public class Hot_issues {
         this.c_tag = c_tag;
         this.images = images;
     }
-    public  int getImages() {
+    public  String getImages() {
         return images;
     }
     public  int getHid() {

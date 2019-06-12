@@ -1,5 +1,7 @@
 package demo.example.chuangke.Fragments.Fragment_frag;
 
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.youth.banner.loader.ImageLoader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +26,7 @@ import demo.example.chuangke.Reality.Hot_issues;
 public class fragment_hot extends Fragment {
     List<Hot_issues> items = new ArrayList<>();
     RecyclerView recyclerView;
-
+    Bitmap [] bitmap;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +55,8 @@ public class fragment_hot extends Fragment {
 
     }
     private void initData(){
-        items.add(new Hot_issues(0,null,0,0,null,null,R.drawable.shouyeblue));
+        String str = "http://image14.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907013518839623.jpg";
+        items.add(new Hot_issues(0,null,0,0,null,null,str));
     }
 
 }

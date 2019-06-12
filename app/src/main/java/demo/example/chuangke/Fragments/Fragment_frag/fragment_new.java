@@ -47,6 +47,7 @@ public class fragment_new extends Fragment {
             }
         });
         recyclerView.setAdapter(rc);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
     }
