@@ -1,18 +1,25 @@
-package demo.example.chuangke.Reality;
+package demo.example.chuangke.gson;
 
 public class New_issues {
-    public String  title;
-    public String  content;
-    public String  usename;
-    public String  time;
+    private String  title;
+    private String  content;
+    private String  usename;
+    private String  time;
 
-    public New_issues() {
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public New_issues(String title, String content, String usename, String time) {
-        this.title = title;
+    public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setUsename(String usename) {
         this.usename = usename;
+    }
+
+    public void setTime(String time) {
         this.time = time;
     }
 

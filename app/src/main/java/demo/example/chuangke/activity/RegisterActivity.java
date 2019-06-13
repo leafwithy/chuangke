@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //注册请求
     public void registerRequest(final String account, final String password){
-        final String loginUrl = "http://10.0.2.2/myProjects/create_space/register.php";
+        final String loginUrl = "http://localhost/register.php";
         RequestBody requestBody= HttpUtil.registerRequestBody(account,password);
         HttpUtil.sendRequest(loginUrl, requestBody, new Callback() {
             @Override
@@ -91,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(okhttp3.Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
+                Toast.makeText(RegisterActivity.this, "resp:"+responseText+"注册失败,连接数据库失败", Toast.LENGTH_SHORT).show();
                 //对服务器返回的信息进行处理
                 runOnUiThread(new Runnable() {
                     @Override
@@ -103,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
                             LoginActivity.actionStart(RegisterActivity.this,account,password);
                             finish();
                         }else {
-                            Toast.makeText(RegisterActivity.this, "注册失败,连接数据库失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "resp:"+responseText+"注册失败,连接数据库失败", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

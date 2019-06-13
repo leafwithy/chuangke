@@ -1,27 +1,45 @@
-package demo.example.chuangke.Reality;
+package demo.example.chuangke.gson;
 
 import android.graphics.Bitmap;
 
 public class Hot_issues {
-    public   int hid;
-    public   String title;
-    public   int concern_num;
-    public   int comment_num;
-    public   String content;
-    public   String c_tag;
-    public   String images;
+    private   int hid;
+    private  String title;
+    private  int concern_num;
+    private  int comment_num;
+    private  String content;
+    private  String c_tag;
+    private  String images;
 
-    public Hot_issues() {
+    public void setHid(int hid) {
+        this.hid = hid;
     }
 
-    public Hot_issues(int hid , String title , int concern_num, int comment_num, String content, String c_tag, String images) {
-        this.hid  = hid;
+    public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setConcern_num(int concern_num) {
         this.concern_num = concern_num;
+    }
+
+    public void setComment_num(int comment_num) {
         this.comment_num = comment_num;
+    }
+
+    public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setC_tag(String c_tag) {
         this.c_tag = c_tag;
+    }
+
+    public void setImages(String images) {
         this.images = images;
+    }
+
+    public Hot_issues() {
     }
     public  String getImages() {
         return images;

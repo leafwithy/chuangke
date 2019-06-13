@@ -67,8 +67,7 @@ public class RecruitListAdapter extends RecyclerView.Adapter<RecruitListAdapter.
     @NonNull
     @Override//填充子项布局，并为控件设置监听器，类似activity的onCreate()
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int viewType) {
-        final View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_recruit,viewGroup,false);
+        final View view = LayoutInflater.from(mContext).inflate(R.layout.item_recruit,viewGroup,false);
         final ViewHolder holder = new ViewHolder(view);
         //因为notify未完成时，所以一直返回NO_POSITION(-1)。所以不能在onCreateViewHolder()中调用getChildAdapterPosition
         //final int position = mRecyclerView.getChildAdapterPosition(view);
@@ -78,14 +77,15 @@ public class RecruitListAdapter extends RecyclerView.Adapter<RecruitListAdapter.
     //当子项被滚动到屏幕时调用
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-        RecuitItem item = mRecuitList.get(i);
-        viewHolder.recruitNameTv.setText(item.getUid());
-        viewHolder.recruitTimeTv.setText(item.getTime());
-        viewHolder.recruitDemandTv.setText(item.getDemand());
-        viewHolder.recruitCollectLbtn.setLiked(item.getStar());
-        viewHolder.recruitCollectSumTv.setText(String.valueOf(item.getStar_sum()));//TODO：名字有点问题
-        viewHolder.recruitInfoTv.setText(item.getIntro());
-
+        if (mRecuitList.size()>0) {
+            RecuitItem item = mRecuitList.get(i);
+            viewHolder.recruitNameTv.setText(item.getUid());
+            viewHolder.recruitTimeTv.setText(item.getTime());
+            viewHolder.recruitDemandTv.setText(item.getDemand());
+            viewHolder.recruitCollectLbtn.setLiked(item.getStar());
+            viewHolder.recruitCollectSumTv.setText(String.valueOf(item.getStar_sum()));//TODO：名字有点问题
+            viewHolder.recruitInfoTv.setText(item.getIntro());
+        }
         final int position = i;
         final int nowRid = mRecuitList.get(position).getRid();
         //点击“评论”
@@ -141,7 +141,7 @@ public class RecruitListAdapter extends RecyclerView.Adapter<RecruitListAdapter.
 
     @Override
     public int getItemCount() {
-        return mRecuitList.size();
+        return mRecuitList.size()>0?mRecuitList.size():1;
     }
 
     //将RecycleView附加到Adapter上

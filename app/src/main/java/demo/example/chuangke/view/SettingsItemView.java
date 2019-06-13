@@ -57,7 +57,7 @@ public class SettingsItemView extends ConstraintLayout {
 
     //定义SettingsItemView的点击接口
     public interface SettingsItemViewClickListener{
-        void click();
+        void click();           //itemsView的点击事件
     }
 
     //提供给外界的“点击事件”接口

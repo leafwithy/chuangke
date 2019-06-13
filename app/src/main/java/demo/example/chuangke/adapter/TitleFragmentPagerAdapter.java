@@ -9,21 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TitleFragmentPagerAdapter extends FragmentPagerAdapter {
-    List<Fragment> mFragmentList =null;
-    private List<String> titles;
+    private List<Fragment> mFragmentList =null;
+    private List<String> titles =null;
 
-    public TitleFragmentPagerAdapter(FragmentManager fragmentManager, ArrayList<Fragment> fragments){
-        super(fragmentManager);
-        mFragmentList = fragments ;
-    }
     public TitleFragmentPagerAdapter(FragmentManager fragmentManager, ArrayList<Fragment> fragments , List<String> titles){
         super(fragmentManager);
         this.mFragmentList = fragments ;
         this.titles = titles;
-    }
-
-    public TitleFragmentPagerAdapter(FragmentManager fragmentManager) {
-        super(fragmentManager);
     }
 
     @Override
@@ -41,8 +33,6 @@ public class TitleFragmentPagerAdapter extends FragmentPagerAdapter {
         }
         return fragment;
     }
-
-    @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         if(titles!=null&&titles.size()>0){

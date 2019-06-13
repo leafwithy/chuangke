@@ -43,35 +43,49 @@ public class HttpUtil {
                 .add("password", password)
                 .build();
     }
+    public static class  IdeaRequestBody {
+        public static RequestBody getrecruitListRequestBody(String uid, String startRid) {
+            return new FormBody.Builder()
+                    .add("uid", uid)
+                    .add("start_rid", startRid)
+                    .build();
+        }
+        public static RequestBody getcommentListRequestBody(String rid) {
+            return new FormBody.Builder()
+                    .add("rid", rid)
+                    .build();
+        }
+        public static RequestBody getNewListRequestBody(String nid){
+            return new FormBody.Builder().add("nid",nid).build();
+        }
+        public static RequestBody getHotListRequestBody(String hid) {
+            return new FormBody.Builder().add("hid", hid).build();
+        }
+        public static RequestBody postCommentRequestBody(String rid,String uid,String content){
+            return new FormBody.Builder()
+                    .add("rid", rid)
+                    .add("uid", uid)
+                    .add("content",content)
+                    .build();
+        }
+        public static RequestBody postRecruitRequestBody(String uid,String intro,String demand){
+            return new FormBody.Builder()
+                    .add("uid", uid)
+                    .add("intro", intro)
+                    .add("demand",demand)
+                    .build();
+        }
+        public static RequestBody postNewListRequesrBody(String nid,String content){
+            return new FormBody.Builder().add("nid",nid).add("content",content).build();
+        }
+        public static RequestBody postHotListRequestBody(String hid,String content){
+            return new FormBody.Builder().add("hid",hid).add("content",content).build();
+        }
 
-    public static RequestBody recruitListRequestBody(String uid,String startRid){
-        return new FormBody.Builder()
-                .add("uid", uid)
-                .add("start_rid", startRid)
-                .build();
-    }
+        }
 
-    public static RequestBody commentListRequestBody(String rid){
-        return new FormBody.Builder()
-                .add("rid", rid)
-                .build();
-    }
 
-    public static RequestBody insertCommentRequestBody(String rid,String uid,String content){
-        return new FormBody.Builder()
-                .add("rid", rid)
-                .add("uid", uid)
-                .add("content",content)
-                .build();
-    }
 
-    public static RequestBody publishRecruitRequestBody(String uid,String intro,String demand){
-        return new FormBody.Builder()
-                .add("uid", uid)
-                .add("intro", intro)
-                .add("demand",demand)
-                .build();
-    }
 
     public static RequestBody starRequestBody(int type,String uid,String rid){
         return new FormBody.Builder()

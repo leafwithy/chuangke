@@ -1,4 +1,4 @@
-package demo.example.chuangke.Fragments;
+package demo.example.chuangke.fragments.Fragment_frag;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class RecruitListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_recruit_list,container,false);
+        mView = inflater.inflate(R.layout.fragmentidea_recruit_list,container,false);
         initView(mView);
         initData();
         return mView;
@@ -72,8 +73,9 @@ public class RecruitListFragment extends Fragment {
 
     //联网获取招贤列表
     private void getRecruitList(){
-        final String url = "http://10.0.2.2/myProjects/create_space/get_recruit.php";
-        RequestBody requestBody = HttpUtil.recruitListRequestBody(UserUitl.uid,String.valueOf(startRid));
+        final String url = "http://localhost/get_recruit.php";
+        RequestBody requestBody = HttpUtil.IdeaRequestBody.getrecruitListRequestBody(UserUitl.uid,String.valueOf(startRid));
+        Log.d("tag2","执行缓存周边列表");
         HttpUtil.sendRequest(url, requestBody, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

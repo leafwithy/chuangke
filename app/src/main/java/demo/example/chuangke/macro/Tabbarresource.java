@@ -3,7 +3,7 @@ package demo.example.chuangke.macro;
 
 import demo.example.chuangke.R;
 
-public class tabbarresource {
+public class Tabbarresource {
     public static final String BottomItem1 = "首页";
     public static final String BottomItem2 = "idea";
     public static final String BottomItem3 = "我";

@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-import demo.example.chuangke.MainActivity;
 import demo.example.chuangke.R;
 import demo.example.chuangke.util.HttpUtil;
 import demo.example.chuangke.util.UserUitl;
@@ -94,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //发送“登录”请求
     public void loginRequest(final String account, final String password){
-        final String loginUrl = "http://10.0.2.2/myProjects/create_space/login.php";
+        final String loginUrl = "http://localhost/login.php";
         RequestBody requestBody= HttpUtil.loginRequestBody(account,password);
         HttpUtil.sendRequest(loginUrl, requestBody, new Callback() {
             @Override

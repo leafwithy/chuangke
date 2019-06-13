@@ -1,4 +1,4 @@
-package demo.example.chuangke;
+package demo.example.chuangke.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,11 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.hjm.bottomtabbar.BottomTabBar;
 
-import demo.example.chuangke.Fragments.FragmentPerson;
-import demo.example.chuangke.Fragments.FragmentShouye;
-import demo.example.chuangke.Fragments.Fragmentidea;
-import demo.example.chuangke.Fragments.MineFragment;
-import demo.example.chuangke.macro.tabbarresource;
+import demo.example.chuangke.fragments.FragmentShouye;
+import demo.example.chuangke.fragments.Fragmentidea;
+import demo.example.chuangke.fragments.MineFragment;
+import demo.example.chuangke.R;
+import demo.example.chuangke.macro.Tabbarresource;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         btb.init(getSupportFragmentManager())
                 .setFontSize(8)
                 .setChangeColor(Color.BLUE,Color.GRAY)
-                .addTabItem(tabbarresource.BottomItem1, tabbarresource.BottomItemimage1, FragmentShouye.class)
-                .addTabItem(tabbarresource.BottomItem2, tabbarresource.BottomItemimage4, Fragmentidea.class)
-                .addTabItem(tabbarresource.BottomItem3, tabbarresource.BottomItemimage6, MineFragment.class)
+                .addTabItem(Tabbarresource.BottomItem1, Tabbarresource.BottomItemimage1, FragmentShouye.class)
+                .addTabItem(Tabbarresource.BottomItem2, Tabbarresource.BottomItemimage4, Fragmentidea.class)
+                .addTabItem(Tabbarresource.BottomItem3, Tabbarresource.BottomItemimage6, MineFragment.class)
                 .isShowDivider(false);
 
     }

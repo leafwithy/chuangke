@@ -1,4 +1,4 @@
-package demo.example.chuangke.Fragments;
+package demo.example.chuangke.fragments;
 
 import android.content.Context;
 import android.os.Bundle;

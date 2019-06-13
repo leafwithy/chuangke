@@ -1,4 +1,4 @@
-package demo.example.chuangke.Fragments;
+package demo.example.chuangke.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +20,13 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.example.chuangke.Activity_shouye_btn.exec_btnac;
-import demo.example.chuangke.Activity_shouye_btn.learn_btnac;
-import demo.example.chuangke.Activity_shouye_btn.new_btnac;
-import demo.example.chuangke.adapter.RecyclerAdapter_hot;
-import demo.example.chuangke.Loader.GlideImageLoader;
+import demo.example.chuangke.activity.Activity_shouye_btn.Exec_btnac;
+import demo.example.chuangke.activity.Activity_shouye_btn.Learn_btnac;
+import demo.example.chuangke.activity.Activity_shouye_btn.New_btnac;
+import demo.example.chuangke.adapter.HotListAdapter;
+import demo.example.chuangke.loader.GlideImageLoader;
 import demo.example.chuangke.R;
-import demo.example.chuangke.Reality.Hot_issues;
+import demo.example.chuangke.gson.Hot_issues;
 
 public class FragmentShouye extends Fragment implements View.OnClickListener {
     List<String> images = new ArrayList<>();
@@ -37,7 +37,7 @@ public class FragmentShouye extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragmentshouye,container,false);
+        View v = inflater.inflate(R.layout.fragment_shouye,container,false);
         initData();
         Banner banner = v.findViewById(R.id.banner);
         banner.setImageLoader(new GlideImageLoader());
@@ -60,7 +60,7 @@ public class FragmentShouye extends Fragment implements View.OnClickListener {
     }
 
     private void initView(){
-        recyclerView.setAdapter(new RecyclerAdapter_hot(getActivity(),items));
+        recyclerView.setAdapter(new HotListAdapter(getActivity(),items));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         btn1.setBackgroundResource(R.drawable.rumenshouce);
@@ -81,13 +81,13 @@ public class FragmentShouye extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rumenshouce:
-                startActivity(new Intent(getActivity(), learn_btnac.class));
+                startActivity(new Intent(getActivity(), Learn_btnac.class));
                 break;
             case R.id.xinlulicheng:
-                startActivity(new Intent(getActivity(), exec_btnac.class));
+                startActivity(new Intent(getActivity(), Exec_btnac.class));
                 break;
             case R.id.zuixinzixun:
-                startActivity(new Intent(getActivity(), new_btnac.class));
+                startActivity(new Intent(getActivity(), New_btnac.class));
         }
     }
 }

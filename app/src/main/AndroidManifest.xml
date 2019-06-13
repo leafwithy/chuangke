@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-    <activity android:name=".MainActivity">
+    <activity android:name=".activity.MainActivity">
     </activity>
-        <activity android:name=".Activity_shouye_btn.exec_btnac"/>
-        <activity android:name=".Activity_shouye_btn.learn_btnac"/>
-        <activity android:name=".Activity_shouye_btn.new_btnac"/>
+        <activity android:name=".activity.Activity_shouye_btn.Exec_btnac"/>
+        <activity android:name=".activity.Activity_shouye_btn.Learn_btnac"/>
+        <activity android:name=".activity.Activity_shouye_btn.New_btnac"/>
 
         <activity android:name="demo.example.chuangke.activity.LoginActivity">
             <intent-filter>

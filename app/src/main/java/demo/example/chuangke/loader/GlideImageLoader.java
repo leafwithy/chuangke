@@ -1,4 +1,4 @@
-package demo.example.chuangke.Loader;
+package demo.example.chuangke.loader;
 
 import android.content.Context;
 import android.widget.ImageView;
