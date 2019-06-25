@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="demo.example.chuangke">
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -8,26 +9,42 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-    <activity android:name=".activity.MainActivity">
-    </activity>
-        <activity android:name=".activity.Activity_shouye_btn.Exec_btnac"/>
-        <activity android:name=".activity.Activity_shouye_btn.Learn_btnac"/>
-        <activity android:name=".activity.Activity_shouye_btn.New_btnac"/>
+        android:theme="@style/AppTheme"
+        >
 
+        <activity android:name=".activity.MainActivity"/>
+        <!--首页按钮活动-->
+        <activity android:name=".activity.Activity_shouye_btn.MainJourneyActivity"/>
+        <activity android:name=".activity.Activity_shouye_btn.MainHandbookActivity"/>
+        <activity android:name=".activity.Activity_shouye_btn.MainMessageActivity"/>
+        <activity android:name=".activity.Activity_shouye_btn.MainProveActivity"/>
+        <!--登录活动-->
         <activity android:name="demo.example.chuangke.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!--注册活动-->
+        <activity android:name="demo.example.chuangke.activity.RegisterActivity"/>
 
-        <activity android:name="demo.example.chuangke.activity.RegisterActivity">
-        </activity>
-        <activity android:name="demo.example.chuangke.activity.CommentActivity">
-        </activity>
-        <activity android:name="demo.example.chuangke.activity.PublishRecruitActivity">
-        </activity>
+        <!--个人页按钮活动-->
+
+        <activity android:name=".activity.Activity_mine_btn.MineAttentionActivity"/>
+        <activity android:name=".activity.Activity_mine_btn.MineCollectActivity"/>
+        <activity android:name=".activity.Activity_mine_btn.MineNotebookActivity"/>
+        <activity android:name=".activity.Activity_mine_btn.MineHelpActivity"/>
+        <activity android:name=".activity.Activity_mine_btn.MineMessageActivity"/>
+        <activity android:name=".activity.Activity_mine_btn.MineUserActivity"/>
+        <activity android:name=".activity.Activity_mine_btn.MineBackAccountActivity"/>
+
+        <!--idea页item点击跳转活动-->
+        <activity android:name=".activity.Actiivty_idea_itemclick.IdeaHotissuesActivity"/>
+        <activity android:name=".activity.Actiivty_idea_itemclick.IdeaNewissuesActivity"/>
+        <activity android:name="demo.example.chuangke.activity.PublishRecruitActivity"/>
+
+        <!--评论活动-->
+        <activity android:name="demo.example.chuangke.activity.CommentActivity"/>
     </application>
 
 </manifest>

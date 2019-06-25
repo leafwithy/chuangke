@@ -1,8 +1,10 @@
 package demo.example.chuangke.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,7 @@ import java.util.List;
 import demo.example.chuangke.R;
 import demo.example.chuangke.gson.New_issues;
 
-public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.myViewHolder> {
+public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.MyViewHolder> {
     private List<New_issues> itemsList ;
     private Context context;
 
@@ -24,58 +26,67 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.myViewHo
 
     @NonNull
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        final View view = LayoutInflater.from(context).inflate(R.layout.rc_newlist_items,viewGroup,false);
-        final myViewHolder holder = new myViewHolder(view);
-        return holder;
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.rc_newlist_items,viewGroup,false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull NewListAdapter.myViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull NewListAdapter.MyViewHolder myViewHolder, int i) {
         if(itemsList.size()>0) {
-            myViewHolder.textView1.setText(itemsList.get(i).getTitle());
-            myViewHolder.textView2.setText(itemsList.get(i).getContent());
-            myViewHolder.textView3.setText(itemsList.get(i).getUsename());
-            myViewHolder.textView4.setText(itemsList.get(i).getTime());
-        }else{
 
+            myViewHolder.textView1.setText(String.valueOf(itemsList.get(i).getTitle()));
+            myViewHolder.textView2.setText(String.valueOf(itemsList.get(i).getContent()));
+            myViewHolder.textView3.setText(String.valueOf(itemsList.get(i).getName()));
+            myViewHolder.textView4.setText(itemsList.get(i).getDeadline() +"小时前");
         }
     }
 
     @Override
     public int getItemCount() {
-        return itemsList.size()>0?itemsList.size():1;
+        return itemsList.size();
     }
 
-    class myViewHolder extends  RecyclerView.ViewHolder{
-        private TextView textView1;
-        private TextView textView2;
-        private TextView textView3;
-        private TextView textView4;
+    class MyViewHolder extends  RecyclerView.ViewHolder{
+         TextView textView1;
+         TextView textView2;
+         TextView textView3;
+         TextView textView4;
 
-        public myViewHolder(@NonNull final View itemView) {
+        MyViewHolder(@NonNull final View itemView) {
             super(itemView);
-            textView1 = itemView.findViewById(R.id.new_title_items);
-            textView2  = itemView.findViewById(R.id.new_content_items);
-            textView3 = itemView.findViewById(R.id.new_name_items);
-            textView4 = itemView.findViewById(R.id.new_time_items);
+            textView1 = itemView.findViewById(R.id.title_item);
+            textView2  = itemView.findViewById(R.id.content_item);
+            textView3 = itemView.findViewById(R.id.name_item);
+            textView4 = itemView.findViewById(R.id.deadline_item);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(onItemClickListener!=null){
-                        onItemClickListener.OnItemClick(itemView,"哦？");
+                        onItemClickListener.OnItemClick(itemView.getContext());
+
                     }
                 }
             });
         }
     }
     public interface OnItemClickListener{
-        public void OnItemClick(View v,String str);
+        public void OnItemClick(Context context);
     }
-    OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
     }
 }

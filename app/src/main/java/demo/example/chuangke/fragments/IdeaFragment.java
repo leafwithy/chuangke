@@ -20,10 +20,8 @@ import demo.example.chuangke.fragments.Fragment_frag.NewListFragment;
 import demo.example.chuangke.R;
 
 
-public class Fragmentidea extends Fragment {
-    private TabLayout layout;
-    private ViewPager viewPager;
-    ArrayList<Fragment> fragment = new ArrayList<Fragment>();
+public class IdeaFragment extends Fragment {
+    ArrayList<Fragment> fragment = new ArrayList<>();
     List<String> titles = new ArrayList<>();
 
 
@@ -31,14 +29,14 @@ public class Fragmentidea extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_idea,container,false);
+        View v = inflater.inflate(R.layout.idea,container,false);
         initView(v);
         return v;
     }
 
     private void initView(View v) {
-        viewPager = (ViewPager) v.findViewById(R.id.viewpager);
-        layout = (TabLayout) v.findViewById(R.id.tabLayout);
+        ViewPager viewPager =v.findViewById(R.id.viewpager);
+        TabLayout layout =  v.findViewById(R.id.tabLayout);
 
         titles.add("热门推荐");
         titles.add("最新动态");

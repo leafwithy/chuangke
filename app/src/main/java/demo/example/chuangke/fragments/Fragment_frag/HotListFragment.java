@@ -1,5 +1,6 @@
 package demo.example.chuangke.fragments.Fragment_frag;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,10 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -18,9 +19,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.List;
+import java.util.Objects;
+
+import demo.example.chuangke.activity.Actiivty_idea_itemclick.IdeaHotissuesActivity;
 import demo.example.chuangke.adapter.HotListAdapter;
 import demo.example.chuangke.R;
 import demo.example.chuangke.gson.HotListResult;
@@ -32,14 +35,16 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HotListFragment extends Fragment {
-    List<Hot_issues> items = new ArrayList<>();
+
     RecyclerView recyclerView;
+    private HotListAdapter rc;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragmentidea_hot,container,false);
-        initView(v);
+        View v = inflater.inflate(R.layout.idea_hot,container,false);
+        recyclerView = v.findViewById(R.id.recycleV2);
         initData();
+        initView();
         return v;
     }
 
@@ -48,10 +53,9 @@ public class HotListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    private void initView(View v){
-        recyclerView = v.findViewById(R.id.recycleV2);
+    private void initView(){
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getActivity()),DividerItemDecoration.VERTICAL));
 
     }
 
@@ -60,19 +64,23 @@ public class HotListFragment extends Fragment {
     }
 
     private void setRecyclerView(List<Hot_issues> hotList){
-        HotListAdapter rc = new HotListAdapter(getActivity(),hotList);
+        rc = new HotListAdapter(getActivity(),hotList);
+        rc.onAttachedToRecyclerView(recyclerView);
         rc.setOnItemClickListener(new HotListAdapter.OnItemClickListener() {
             @Override
-            public void OnItemClick(View view, String str) {
-                Toast.makeText(getContext(),str,Toast.LENGTH_SHORT).show();
+            public void OnItemClick(Context context) {
+                IdeaHotissuesActivity.actionStart(context);
             }
         });
         recyclerView.setAdapter(rc);
+
     }
+
     private HotListResult handHotListRequest(String responseStr){
         try{
             JSONObject jsonArray = new JSONObject(responseStr);
             String jsonStr = jsonArray.toString();
+          //  Log.d("responses",jsonStr);
             return new Gson().fromJson(jsonStr,HotListResult.class);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -80,34 +88,44 @@ public class HotListFragment extends Fragment {
         return null;
     }
     private void getHotList(){
-        final String url = "";
-        RequestBody requestBody = HttpUtil.IdeaRequestBody.getHotListRequestBody("");
+        final String url = "http://192.168.191.1/get_hotpoints.php";
+        RequestBody requestBody = HttpUtil.IdeaRequestBody.getHotListRequestBody("1");
         HttpUtil.sendRequest(url, requestBody, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                getActivity().runOnUiThread(new Runnable() {
+                Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+
+                        Log.d("hotListFragment", "网络连接失败");
                     }
                 });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String responseStr = response.body().string();
-                getActivity().runOnUiThread(new Runnable() {
+                 String responseStr = response.body().string();
+                final    HotListResult hotListResult = handHotListRequest(responseStr);
+
+             //   Log.d("responses",responseStr);
+                Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        HotListResult hotListResult = handHotListRequest(responseStr);
-                        if(hotListResult.getStatus()!=1||hotListResult==null){
-                            Toast.makeText(getContext(), "获取列表失败", Toast.LENGTH_SHORT).show();
-                        }else if(hotListResult.getHot_issuesList()==null){
-                            Toast.makeText(getContext(), "列表为空", Toast.LENGTH_SHORT).show();
+                        if(hotListResult!=null) {
+                            //Log.d("responses",""+hotListResult.getHotpItemList().get(0));
+                            if (hotListResult.getStatus() ==0 ) {
+
+                                Log.d("hotListFragment", "数据库连接失败");
+                            } else if (hotListResult.getStatus()==1&&hotListResult.getHotpItemList() == null) {
+
+                                Log.d("hotListFragment", "列表为空");
+                            } else {
+                                setRecyclerView(hotListResult.getHotpItemList());
+                                Log.d("hotListFragment", "获取列表成功");
+                            }
                         }else{
-                            setRecyclerView(hotListResult.getHot_issuesList());
-                            Toast.makeText(getContext(), "获取列表成功", Toast.LENGTH_SHORT).show();
+                            Log.d("hotListFragment", "url错误");
                         }
                     }
                 });

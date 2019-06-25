@@ -4,7 +4,12 @@ import java.util.List;
 
 public class HotListResult {
     private int status; //状态码
-    private List<Hot_issues> hot_issuesList;  //热门推荐表
+    private List<Hot_issues> hotpItemList;  //热门推荐表
+
+   /* @Override
+    public String toString() {
+        return hotpItemList.get(1).toString()+hotpItemList.get(2)+hotpItemList.get(3)+hotpItemList.get(4)+hotpItemList.get(5);
+    }*/
 
     public int getStatus() {
         return status;
@@ -14,11 +19,11 @@ public class HotListResult {
         this.status = status;
     }
 
-    public List<Hot_issues> getHot_issuesList() {
-        return hot_issuesList;
+    public List<Hot_issues> getHotpItemList() {
+        return hotpItemList;
     }
 
-    public void setHot_issuesList(List<Hot_issues> hot_issuesList) {
-        this.hot_issuesList = hot_issuesList;
+    public void setHotpItemList(List<Hot_issues> hotpItemList) {
+        this.hotpItemList = hotpItemList;
     }
 }

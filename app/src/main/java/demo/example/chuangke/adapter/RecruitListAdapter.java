@@ -29,11 +29,11 @@ import okhttp3.Response;
 public class RecruitListAdapter extends RecyclerView.Adapter<RecruitListAdapter.ViewHolder> {
     private Context mContext;
     private List<RecuitItem> mRecuitList;
-    private RecyclerView mRecyclerView;
+
 
     //实例暂存器（内部类）
     static class ViewHolder extends RecyclerView.ViewHolder{
-        View recruitView;
+
         CircleImageView recruitProfileIv;
         TextView recruitNameTv;
         TextView recruitTimeTv;
@@ -45,7 +45,6 @@ public class RecruitListAdapter extends RecyclerView.Adapter<RecruitListAdapter.
 
         public ViewHolder(View view){
             super(view);
-            recruitView = view;
             recruitProfileIv = (CircleImageView)view.findViewById(R.id.civ_recruit_profile);
             recruitNameTv = (TextView)view.findViewById(R.id.tv_recruit_name);
             recruitTimeTv = (TextView)view.findViewById(R.id.tv_recruit_time);
@@ -67,11 +66,7 @@ public class RecruitListAdapter extends RecyclerView.Adapter<RecruitListAdapter.
     @NonNull
     @Override//填充子项布局，并为控件设置监听器，类似activity的onCreate()
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int viewType) {
-        final View view = LayoutInflater.from(mContext).inflate(R.layout.item_recruit,viewGroup,false);
-        final ViewHolder holder = new ViewHolder(view);
-        //因为notify未完成时，所以一直返回NO_POSITION(-1)。所以不能在onCreateViewHolder()中调用getChildAdapterPosition
-        //final int position = mRecyclerView.getChildAdapterPosition(view);
-        return holder;
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.rc_recruit_items,viewGroup,false));
     }
 
     //当子项被滚动到屏幕时调用
@@ -79,7 +74,7 @@ public class RecruitListAdapter extends RecyclerView.Adapter<RecruitListAdapter.
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         if (mRecuitList.size()>0) {
             RecuitItem item = mRecuitList.get(i);
-            viewHolder.recruitNameTv.setText(item.getUid());
+            viewHolder.recruitNameTv.setText(String.valueOf(item.getUid()));
             viewHolder.recruitTimeTv.setText(item.getTime());
             viewHolder.recruitDemandTv.setText(item.getDemand());
             viewHolder.recruitCollectLbtn.setLiked(item.getStar());
@@ -97,7 +92,7 @@ public class RecruitListAdapter extends RecyclerView.Adapter<RecruitListAdapter.
         });
         //设置“点赞”控件的点击监听时间
         viewHolder.recruitCollectLbtn.setOnLikeListener(new OnLikeListener() {
-            final String url = "http://10.0.2.2/myProjects/create_space/star.php";
+            final String url = "http://192.168.191.1/star.php";
             final String sumText = viewHolder.recruitCollectSumTv.getText().toString();
             @Override
             public void liked(LikeButton likeButton) {
@@ -148,13 +143,13 @@ public class RecruitListAdapter extends RecyclerView.Adapter<RecruitListAdapter.
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
+
     }
 
     //将RecycleView从Adapter解除
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-        mRecyclerView = null;
+
     }
 }

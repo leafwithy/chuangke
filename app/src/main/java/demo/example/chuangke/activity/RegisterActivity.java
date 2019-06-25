@@ -22,21 +22,21 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mAccountTv;    //账号编辑框
     private EditText mPwdTv;        //密码编辑框
     private EditText mRePwdTv;      //确认密码编辑框
-    private Button mRegisterBt;     //注册按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.register);
         initView();
     }
 
     //初始化控件View
     private void initView(){
-        mAccountTv = (EditText) findViewById(R.id.et_register_account);
-        mPwdTv = (EditText)findViewById(R.id.et_register_pwd);
-        mRePwdTv = (EditText)findViewById(R.id.et_register_repwd);
-        mRegisterBt = (Button) findViewById(R.id.btn_register2);
+        mAccountTv = findViewById(R.id.et_register_account);
+        mPwdTv = findViewById(R.id.et_register_pwd);
+        mRePwdTv = findViewById(R.id.et_register_repwd);
+        //注册按钮
+        Button mRegisterBt = findViewById(R.id.btn_register2);
 
         mRegisterBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,8 +45,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String account = mAccountTv.getText().toString();
                 String password = mPwdTv.getText().toString();
                 String password2 = mRePwdTv.getText().toString();
-                if (check(account,password,password2))
+                if (check(account,password,password2)) {
                     registerRequest(account, password);
+                }
             }
         });
     }
@@ -74,44 +75,46 @@ public class RegisterActivity extends AppCompatActivity {
 
     //注册请求
     public void registerRequest(final String account, final String password){
-        final String loginUrl = "http://localhost/register.php";
+        final String registerUrl = "http://192.168.191.1/register.php";
         RequestBody requestBody= HttpUtil.registerRequestBody(account,password);
-        HttpUtil.sendRequest(loginUrl, requestBody, new Callback() {
+        HttpUtil.sendRequest(registerUrl, requestBody, new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
                 e.printStackTrace();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "注册失败,在这里", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
 
             @Override
-            public void onResponse(okhttp3.Call call, Response response) throws IOException {
+            public void onResponse(okhttp3.Call call, final Response response) throws IOException {
                 final String responseText = response.body().string();
-                Toast.makeText(RegisterActivity.this, "resp:"+responseText+"注册失败,连接数据库失败", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RegisterActivity.this, "resp:"+responseText+"注册失败,连接数据库失败", Toast.LENGTH_SHORT).show();
                 //对服务器返回的信息进行处理
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (responseText.equals("-1"))
-                            Toast.makeText(RegisterActivity.this, "已有相同用户名", Toast.LENGTH_SHORT).show();
+                            makeToast("已有用户名");
                         else if (responseText.equals("1")){
-                            Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                            makeToast("注册成功");
                             //启动登录活动
-                            LoginActivity.actionStart(RegisterActivity.this,account,password);
-                            finish();
+                           // LoginActivity.actionStart(RegisterActivity.this,account,password);
+                          //  finish();
                         }else {
-                            Toast.makeText(RegisterActivity.this, "resp:"+responseText+"注册失败,连接数据库失败", Toast.LENGTH_SHORT).show();
+                            makeToast(responseText);
                         }
                     }
                 });
             }
         });
     }
-
+    public void makeToast(String text){
+        Toast.makeText(RegisterActivity.this, text, Toast.LENGTH_SHORT).show();
+    }
     //RegisterActivity的启动方法
     public static void actionStart(Context context){
         Intent intent = new Intent(context, RegisterActivity.class);

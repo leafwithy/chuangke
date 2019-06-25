@@ -18,7 +18,6 @@ public class SettingsItemView extends ConstraintLayout {
     private ImageView themeIv;
     private TextView themeTv;
     private View bottomLineView;
-    private View itemView;
     private SettingsItemViewClickListener mListener;
 
     //构造器
@@ -29,7 +28,7 @@ public class SettingsItemView extends ConstraintLayout {
     }
     //初始化View的实例、监听器等
     private void initView(Context context,AttributeSet attrs){
-        itemView = LayoutInflater.from(context).inflate(R.layout.item_settings,this);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.item_settings, this);
         themeIv = (ImageView)findViewById(R.id.iv_theme);
         themeTv = (TextView)findViewById(R.id.tv_theme);
         bottomLineView = (View)findViewById(R.id.view_bottom_line);
@@ -50,7 +49,7 @@ public class SettingsItemView extends ConstraintLayout {
         //themeIv.setBackground(ta.getDrawable(R.styleable.SettingsItemView_themeIcon));    //好像因为版本问题不能用了
         themeIv.setImageDrawable(ta.getDrawable(R.styleable.SettingsItemView_themeIcon));
         themeTv.setText(ta.getString(R.styleable.SettingsItemView_titleText));
-        Boolean isBottomLine = ta.getBoolean(R.styleable.SettingsItemView_isBottomLine,false);
+        boolean isBottomLine = ta.getBoolean(R.styleable.SettingsItemView_isBottomLine,false);
         bottomLineView.setVisibility(isBottomLine ? View.VISIBLE : View.INVISIBLE);
         ta.recycle();       //回收TypedArray资源，避免重新创建时的错误
     }

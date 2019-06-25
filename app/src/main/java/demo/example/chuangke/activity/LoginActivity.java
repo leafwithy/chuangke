@@ -26,8 +26,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mAccountTv;        //账号编辑框
     private EditText mPwdTv;            //密码编辑框
     private CheckBox mIsRememberCb;    //“是否记住密码”复选框
-    private Button mLoginBt;           //登录按钮
-    private Button mRegisterBt;        //注册按钮
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
 
@@ -35,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login);
         initView();
         initData();
     }
@@ -43,11 +41,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //初始化控件View
     private void initView(){
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-        mAccountTv = (EditText) findViewById(R.id.et_login_account);
-        mPwdTv = (EditText) findViewById(R.id.et_login_pwd);
-        mIsRememberCb = (CheckBox)findViewById(R.id.cb_login_isRemember);
-        mLoginBt = (Button)findViewById(R.id.btn_login);
-        mRegisterBt = (Button)findViewById(R.id.btn_register);
+        mAccountTv =  findViewById(R.id.et_login_account);
+        mPwdTv =  findViewById(R.id.et_login_pwd);
+        mIsRememberCb = findViewById(R.id.cb_login_isRemember);
+        //登录按钮
+        Button mLoginBt = findViewById(R.id.btn_login);
+        //注册按钮
+        Button mRegisterBt = findViewById(R.id.btn_register);
 
         mLoginBt.setOnClickListener(this);
         mRegisterBt.setOnClickListener(this);
@@ -81,9 +81,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_login://登录按钮的点击事件
                 String account = mAccountTv.getText().toString();
                 String password = mPwdTv.getText().toString();
-                loginRequest(account, password);
+                loginRequest(account, password);  //登录代码
                 //requestTest();//test
                 //requestTest2(name,password);
+                //MainActivity.actionStart(LoginActivity.this);  //测试MainActivity
                 break;
             case R.id.btn_register://注册按钮的点击事件
                 RegisterActivity.actionStart(LoginActivity.this);
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //发送“登录”请求
     public void loginRequest(final String account, final String password){
-        final String loginUrl = "http://localhost/login.php";
+        final String loginUrl = "http://192.168.191.1/login.php";
         RequestBody requestBody= HttpUtil.loginRequestBody(account,password);
         HttpUtil.sendRequest(loginUrl, requestBody, new Callback() {
             @Override
@@ -115,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void run() {
                         if(!responseText.equals("0")){
-                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "登录成功了，是的", Toast.LENGTH_SHORT).show();
                             UserUitl.uid = responseText;             //在用户工具类存储当前用户UID
                             UserUitl.name = account;                 //在用户工具类存储当前用户名
                             //是否要记住密码

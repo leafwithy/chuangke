@@ -4,7 +4,7 @@ import java.util.List;
 
 public class NewListResult {
     private int status;   //状态码
-    private List<New_issues> new_issuesList;  //最新资讯表
+    private List<New_issues> newItemList;  //最新资讯表
 
     public int getStatus() {
         return status;
@@ -14,11 +14,11 @@ public class NewListResult {
         this.status = status;
     }
 
-    public List<New_issues> getNew_issuesList() {
-        return new_issuesList;
+    public List<New_issues> getNewItemList() {
+        return newItemList;
     }
 
-    public void setNew_issuesList(List<New_issues> new_issuesList) {
-        this.new_issuesList = new_issuesList;
+    public void setNewItemList(List<New_issues> newItemList) {
+        this.newItemList = newItemList;
     }
 }

@@ -1,11 +1,11 @@
 package demo.example.chuangke.gson;
 
 public class New_issues {
+    private String  did;
     private String  title;
     private String  content;
-    private String  usename;
-    private String  time;
-
+    private String  name;
+    private int  deadline;
 
     public void setTitle(String title) {
         this.title = title;
@@ -13,14 +13,6 @@ public class New_issues {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public void setUsename(String usename) {
-        this.usename = usename;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getTitle() {
@@ -31,11 +23,28 @@ public class New_issues {
         return content;
     }
 
-    public String getUsename() {
-        return usename;
+    public String getDid() {
+        return did;
     }
 
-    public String getTime() {
-        return time;
+    public void setDid(String did) {
+        this.did = did;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public int getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(int deadline) {
+        this.deadline = deadline;
     }
 }

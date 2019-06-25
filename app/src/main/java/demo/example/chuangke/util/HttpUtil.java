@@ -18,7 +18,7 @@ public class HttpUtil {
         private static final OkHttpClient sOkHttpClient = new OkHttpClient();
     }
 
-    public static final OkHttpClient getOkHttpClient(){
+    private static OkHttpClient getOkHttpClient(){
         return ClientHolder.sOkHttpClient;
     }
 
@@ -43,6 +43,21 @@ public class HttpUtil {
                 .add("password", password)
                 .build();
     }
+    public static class  MainRequestBody{
+        public static RequestBody getProveItemListRequestBody(String pid){
+            return new FormBody.Builder()
+                    .add("pid",pid)
+                    .build();
+        }
+        public static RequestBody postProveItemListRequestBody(String title,String type,String readnum,String image){
+            return new FormBody.Builder()
+                    .add("title",title)
+                    .add("type",type)
+                    .add("readnum",readnum)
+                    .add("image",image)
+                    .build();
+        }
+    }
     public static class  IdeaRequestBody {
         public static RequestBody getrecruitListRequestBody(String uid, String startRid) {
             return new FormBody.Builder()
@@ -55,8 +70,8 @@ public class HttpUtil {
                     .add("rid", rid)
                     .build();
         }
-        public static RequestBody getNewListRequestBody(String nid){
-            return new FormBody.Builder().add("nid",nid).build();
+        public static RequestBody getNewListRequestBody(String did){
+            return new FormBody.Builder().add("did",did).build();
         }
         public static RequestBody getHotListRequestBody(String hid) {
             return new FormBody.Builder().add("hid", hid).build();

@@ -11,15 +11,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import demo.example.chuangke.R;
+import demo.example.chuangke.activity.Activity_mine_btn.MineAttentionActivity;
+import demo.example.chuangke.activity.Activity_mine_btn.MineCollectActivity;
+import demo.example.chuangke.activity.Activity_mine_btn.MineHelpActivity;
+import demo.example.chuangke.activity.Activity_mine_btn.MineMessageActivity;
+import demo.example.chuangke.activity.Activity_mine_btn.MineNotebookActivity;
+import demo.example.chuangke.activity.Activity_mine_btn.MineUserActivity;
 import demo.example.chuangke.activity.LoginActivity;
 import demo.example.chuangke.util.UserUitl;
 import demo.example.chuangke.view.SettingsItemView;
 
 public class MineFragment extends Fragment implements View.OnClickListener {
-    private View mView;                               //本碎片视图
 
     private TextView mSettingsTv;                    //设置文本框
     private LinearLayout mNameItemLl;                //用户名子项
@@ -34,30 +39,29 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_mine,container,false);
-        initView(mView);
-        return mView;
+        //本碎片视图
+        View view = inflater.inflate(R.layout.mine, container, false);
+        mSettingsTv = view.findViewById(R.id.tv_mine_settings);
+        mNameItemLl = view.findViewById(R.id.ll_name_item);
+        mNameTv =  view.findViewById(R.id.tv_mine_name);
+        mNoteSiv = view.findViewById(R.id.siv_note_item);
+        mCollectionSiv = view.findViewById(R.id.siv_collection_item);
+        mAttentionLSiv =  view.findViewById(R.id.siv_attention_item);
+        mHelpSiv = view.findViewById(R.id.siv_help_item);
+        mMessageSiv = view.findViewById(R.id.siv_message_item);
+        mEditBt = view.findViewById(R.id.btn_mine_exit);
+        initData();
+        initView();
+        return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        initData();
     }
 
     //初始化控件
-    private void initView(View view){
-        mSettingsTv = (TextView)view.findViewById(R.id.tv_mine_settings);
-        mNameItemLl = (LinearLayout)view.findViewById(R.id.ll_name_item);
-        mNameTv = (TextView) view.findViewById(R.id.tv_mine_name);
-        mNoteSiv = (SettingsItemView)view.findViewById(R.id.siv_note_item);
-        mCollectionSiv = (SettingsItemView) view.findViewById(R.id.siv_collection_item);
-        mAttentionLSiv = (SettingsItemView) view.findViewById(R.id.siv_attention_item);
-        mHelpSiv = (SettingsItemView)view.findViewById(R.id.siv_help_item);
-        mMessageSiv = (SettingsItemView)view.findViewById(R.id.siv_message_item);
-        mEditBt = (Button)view.findViewById(R.id.btn_mine_exit);
-
-
+    private void initView(){
         mSettingsTv.setOnClickListener(this);
         mNameItemLl.setOnClickListener(this);
         mNoteSiv.setOnClickListener(this);
@@ -78,37 +82,45 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Context context = getContext();
-        switch (view.getId()){
-            case R.id.btn_mine_exit://点击退出登录按钮
-                LoginActivity.actionStart(context,null,null);
-                break;
-            case R.id.tv_mine_settings:
-                //点击 设置
-                break;
-            case R.id.ll_name_item:
-                //点击 用户名子项
-                Toast.makeText(context, "点击用户名子项", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.siv_note_item:
-                //点击 笔记本子项
-                Toast.makeText(context, "点击笔记本子项", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.siv_collection_item:
-                //点击 收藏子项
-                Toast.makeText(context, "点击收藏子项", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.siv_attention_item:
-                //点击 关注子项
-                Toast.makeText(context, "点击关注子项", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.siv_help_item:
-                //点击 帮助子项
-                Toast.makeText(context, "点击帮助子项", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.siv_message_item:
-                //点击 消息子项
-                Toast.makeText(context, "点击消息子项", Toast.LENGTH_SHORT).show();
-                break;
+        if(context!=null) {
+            switch (view.getId()) {
+                case R.id.btn_mine_exit://点击退出登录按钮
+                    LoginActivity.actionStart(context, null, null);
+                    break;
+                case R.id.tv_mine_settings:
+                    //点击 设置
+                    break;
+                case R.id.ll_name_item:
+                    //点击 用户名子项
+                    MineUserActivity.actionStart(context);
+                    //Toast.makeText(context, "点击用户名子项", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.siv_note_item:
+                    //点击 笔记本子项
+                    MineNotebookActivity.actionStart(context);
+                    //Toast.makeText(context, "点击笔记本子项", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.siv_collection_item:
+                    //点击 收藏子项
+                    MineCollectActivity.actionStart(context);
+                    //Toast.makeText(context, "点击收藏子项", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.siv_attention_item:
+                    //点击 关注子项
+                    MineAttentionActivity.actionStart(context);
+                    //Toast.makeText(context, "点击关注子项", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.siv_help_item:
+                    //点击 帮助子项
+                    MineHelpActivity.actionStart(context);
+                    //Toast.makeText(context, "点击帮助子项", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.siv_message_item:
+                    //点击 消息子项
+                    MineMessageActivity.actionStart(context);
+                    //Toast.makeText(context, "点击消息子项", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
 

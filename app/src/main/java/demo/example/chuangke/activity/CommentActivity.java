@@ -48,7 +48,7 @@ public class CommentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment);
+        setContentView(R.layout.comment);
         initView();
     }
 
@@ -80,7 +80,7 @@ public class CommentActivity extends AppCompatActivity {
         //防止PopupWindow被软件盘挡住（当然要在showAtLocation前使用啦）
         mCommentWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         //在指定位置显示PopupWindow
-        View parentView = LayoutInflater.from(this).inflate(R.layout.activity_comment,null);
+        View parentView = LayoutInflater.from(this).inflate(R.layout.comment,null);
         mCommentWindow.showAtLocation(parentView,Gravity.BOTTOM,0,0);
 
         final EditText commentEt = (EditText)contentView.findViewById(R.id.et_comment);
@@ -105,7 +105,7 @@ public class CommentActivity extends AppCompatActivity {
     //发送“添加评论”请求
     private void sendCommentRequest(String content){
         final String url = "http://10.0.2.2/myProjects/create_space/insert_comment.php";
-        RequestBody requestBody = HttpUtil.insertCommentRequestBody(String.valueOf(rid),UserUitl.uid,content);
+        RequestBody requestBody = HttpUtil.IdeaRequestBody.postCommentRequestBody(String.valueOf(rid),UserUitl.uid,content);
         HttpUtil.sendRequest(url, requestBody, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -201,7 +201,7 @@ public class CommentActivity extends AppCompatActivity {
     //发送“获取评论表”的请求
     private void getCommentListRequest(){
         final String commentUrl = "http://10.0.2.2/myProjects/create_space/get_comment.php";
-        RequestBody requestBody = HttpUtil.commentListRequestBody(String.valueOf(rid));
+        RequestBody requestBody = HttpUtil.IdeaRequestBody.getcommentListRequestBody(String.valueOf(rid));
         HttpUtil.sendRequest(commentUrl, requestBody, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

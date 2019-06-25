@@ -23,29 +23,28 @@ public class PublishRecruitActivity extends AppCompatActivity {
 
     private EditText teamInfoEt;
     private EditText demandEt;
-    private Button publishBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_publish_recruit);
+        setContentView(R.layout.pushrecruit);
         initView();
     }
 
     private void initView(){
-        teamInfoEt = (EditText)findViewById(R.id.et_teamInfo_publish);
-        demandEt = (EditText)findViewById(R.id.et_demand_publish);
-        publishBtn = (Button)findViewById(R.id.btn_publish);
+        teamInfoEt = findViewById(R.id.et_teamInfo_publish);
+        demandEt = findViewById(R.id.et_demand_publish);
+        Button publishBtn = findViewById(R.id.btn_publish);
 
         publishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String introEt = teamInfoEt.getText().toString();
                 String demandText = demandEt.getText().toString();
-                if (introEt.equals("") || introEt == null){
+                if (introEt.equals("")){
                     Toast.makeText(PublishRecruitActivity.this, "团队简介不可为空", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (demandText.equals("") || demandText == null){
+                }else if (demandText.equals("")){
                     Toast.makeText(PublishRecruitActivity.this, "招贤需求不可为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -57,7 +56,7 @@ public class PublishRecruitActivity extends AppCompatActivity {
 
     private void publishRecruitRequest(String intro,String demand){
         final String url = "http://10.0.2.2/myProjects/create_space/insert_recruit.php";
-        RequestBody requestBody = HttpUtil.publishRecruitRequestBody(UserUitl.uid,intro,demand);
+        RequestBody requestBody = HttpUtil.IdeaRequestBody.postRecruitRequestBody(UserUitl.uid,intro,demand);
         HttpUtil.sendRequest(url, requestBody, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -70,7 +69,7 @@ public class PublishRecruitActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) {
                 String responseText = response.body().toString();
                 if (responseText.equals("0")){
                     Toast.makeText(PublishRecruitActivity.this, "发布失败", Toast.LENGTH_SHORT).show();

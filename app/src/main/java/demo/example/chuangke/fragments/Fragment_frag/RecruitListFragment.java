@@ -1,5 +1,6 @@
 package demo.example.chuangke.fragments.Fragment_frag;
 
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -18,13 +18,13 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import demo.example.chuangke.R;
 import demo.example.chuangke.adapter.RecruitListAdapter;
 import demo.example.chuangke.gson.RecruitListResult;
 import demo.example.chuangke.gson.RecuitItem;
 import demo.example.chuangke.util.HttpUtil;
-import demo.example.chuangke.util.UserUitl;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.RequestBody;
@@ -34,19 +34,24 @@ public class RecruitListFragment extends Fragment {
     View mView;
     int startRid = 1;
     RecyclerView mRecruitListRv;
+    private RecruitListAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragmentidea_recruit_list,container,false);
-        initView(mView);
+        mView = inflater.inflate(R.layout.idea_recruit,container,false);
+        mRecruitListRv = mView.findViewById(R.id.rv_recruit_list);
         initData();
+        initView();
+
         return mView;
     }
 
-    private void initView(View view){
-        mRecruitListRv = (RecyclerView)view.findViewById(R.id.rv_recruit_list);
+    private void initView(){
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecruitListRv.setLayoutManager(layoutManager);
+
     }
 
     private void initData(){
@@ -55,7 +60,8 @@ public class RecruitListFragment extends Fragment {
 
     //将数据填入列表
     private void setRecyclerView(List<RecuitItem> recuitList){
-        RecruitListAdapter adapter = new RecruitListAdapter(getContext(),recuitList);
+        adapter = new RecruitListAdapter(getActivity(),recuitList);
+        adapter.onAttachedToRecyclerView(mRecruitListRv);
         mRecruitListRv.setAdapter(adapter);
     }
 
@@ -65,6 +71,7 @@ public class RecruitListFragment extends Fragment {
             JSONObject jsonObject = new JSONObject(response);
             String jsonContent = jsonObject.toString();
             return new Gson().fromJson(jsonContent,RecruitListResult.class);
+
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -73,36 +80,41 @@ public class RecruitListFragment extends Fragment {
 
     //联网获取招贤列表
     private void getRecruitList(){
-        final String url = "http://localhost/get_recruit.php";
-        RequestBody requestBody = HttpUtil.IdeaRequestBody.getrecruitListRequestBody(UserUitl.uid,String.valueOf(startRid));
+        final String url = "http://192.168.191.1/get_recruit.php";
+        RequestBody requestBody = HttpUtil.IdeaRequestBody.getrecruitListRequestBody("1",String.valueOf(startRid));
         Log.d("tag2","执行缓存周边列表");
         HttpUtil.sendRequest(url, requestBody, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                getActivity().runOnUiThread(new Runnable() {
+                Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+
+                        Log.d("recruitListFragment", "网络连接失败");
                     }
                 });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String responseText = response.body().string();
-                getActivity().runOnUiThread(new Runnable() {
+                String responseText = response.body().string();
+                final RecruitListResult result = handleRecruitResponse(responseText);
+                Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        RecruitListResult result = handleRecruitResponse(responseText);
+
                         if(result == null ||result.getStatus() != 1){
-                            Toast.makeText(getContext(), "招募列表为空", Toast.LENGTH_SHORT).show();
+
+                            Log.d("recruitListFragment", "数据库连接失败");
                         }else{
-                            if (result.getRecruitList() == null){
-                                Toast.makeText(getContext(), "？？？？？", Toast.LENGTH_SHORT).show();
+                            if (result.getStatus()==1&&result.getRecruitList() == null){
+
+                                Log.d("recruitListFragment", "列表为空");
                             }else {
                                 setRecyclerView(result.getRecruitList());
-                                Toast.makeText(getContext(), "成功获取招募列表", Toast.LENGTH_SHORT).show();
+
+                                Log.d("recruitListFragment", "成功获取招募列表");
                             }
                         }
                     }

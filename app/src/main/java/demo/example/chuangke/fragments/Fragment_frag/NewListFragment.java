@@ -1,5 +1,6 @@
 package demo.example.chuangke.fragments.Fragment_frag;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,10 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
 
 import com.google.gson.Gson;
 
@@ -19,7 +21,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
+import demo.example.chuangke.activity.Actiivty_idea_itemclick.IdeaNewissuesActivity;
 import demo.example.chuangke.adapter.NewListAdapter;
 import demo.example.chuangke.R;
 import demo.example.chuangke.gson.NewListResult;
@@ -32,10 +36,11 @@ import okhttp3.Response;
 
 public class NewListFragment extends Fragment {
     RecyclerView recyclerView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragmentidea_new,container,false);
+        View v = inflater.inflate(R.layout.idea_new,container,false);
         initView(v);
         initData();
         return v;
@@ -49,7 +54,7 @@ public class NewListFragment extends Fragment {
     private void initView(View v){
         recyclerView = v.findViewById(R.id.recycleV1);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getActivity()),DividerItemDecoration.VERTICAL));
     }
 
     private void initData(){
@@ -72,45 +77,54 @@ public class NewListFragment extends Fragment {
     //设置RecycleView子布局
     private void setRecyclerView(List<New_issues> newList){
         NewListAdapter rc = new NewListAdapter(getActivity(),newList);
+        rc.onAttachedToRecyclerView(recyclerView);
         rc.setOnItemClickListener(new NewListAdapter.OnItemClickListener() {
             @Override
-            public void OnItemClick(View v, String str) {
-                Toast.makeText(getContext(),str,Toast.LENGTH_SHORT).show();
+            public void OnItemClick(Context context) {
+                IdeaNewissuesActivity.actionStart(context);
             }
         });
         recyclerView.setAdapter(rc);
     }
 
     private void getNewList(){
-        final String url ="https://localhost/getNew.php";
-        RequestBody requestBody = HttpUtil.IdeaRequestBody.getNewListRequestBody("");
+        final String url ="http://192.168.191.1/get_newnews.php";
+        RequestBody requestBody = HttpUtil.IdeaRequestBody.getNewListRequestBody("1");
         HttpUtil.sendRequest(url, requestBody, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                getActivity().runOnUiThread(new Runnable() {
+                Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getContext(),"网络连接失败",Toast.LENGTH_SHORT).show();
+
+                        Log.d("newlistfragment","网络连接失败");
                     }
                 });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String newList = response.body().string();
+                 String newList = response.body().string();
                 final NewListResult newListResult = handNewItemResource(newList);
-            getActivity().runOnUiThread(new Runnable() {
+                Log.d("newlistsize", newList);
+            Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    if(newListResult!=null) {
+                        if (newListResult.getStatus() ==0) {
 
-                    if (newListResult.getStatus() != 1 || newListResult == null) {
-                        Toast.makeText(getContext(), "获取最新资讯列表失败", Toast.LENGTH_SHORT).show();
-                    } else if (newListResult.getNew_issuesList() == null) {
-                        Toast.makeText(getContext(), "列表为空", Toast.LENGTH_SHORT).show();
-                    } else {
-                        setRecyclerView(newListResult.getNew_issuesList());
-                        Toast.makeText(getContext(), "成功获取列表", Toast.LENGTH_SHORT).show();
+                            Log.d("newlistfragment","数据库连接失败");
+                        } else if (newListResult.getStatus()==1&&newListResult.getNewItemList() == null) {
+
+                            Log.d("newlistfragment","列表为空");
+                        } else {
+                            setRecyclerView(newListResult.getNewItemList());
+
+                            Log.d("newlistfragment","成功获取列表");
+                        }
+                    }else{
+                        Log.d("newlistfragment","url错误");
                     }
                 }
                 });

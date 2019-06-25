@@ -10,8 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.hjm.bottomtabbar.BottomTabBar;
 
-import demo.example.chuangke.fragments.FragmentShouye;
-import demo.example.chuangke.fragments.Fragmentidea;
+import demo.example.chuangke.fragments.MainFragment;
+import demo.example.chuangke.fragments.IdeaFragment;
 import demo.example.chuangke.fragments.MineFragment;
 import demo.example.chuangke.R;
 import demo.example.chuangke.macro.Tabbarresource;
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         btb.init(getSupportFragmentManager())
                 .setFontSize(8)
                 .setChangeColor(Color.BLUE,Color.GRAY)
-                .addTabItem(Tabbarresource.BottomItem1, Tabbarresource.BottomItemimage1, FragmentShouye.class)
-                .addTabItem(Tabbarresource.BottomItem2, Tabbarresource.BottomItemimage4, Fragmentidea.class)
+                .addTabItem(Tabbarresource.BottomItem1, Tabbarresource.BottomItemimage1, MainFragment.class)
+                .addTabItem(Tabbarresource.BottomItem2, Tabbarresource.BottomItemimage4, IdeaFragment.class)
                 .addTabItem(Tabbarresource.BottomItem3, Tabbarresource.BottomItemimage6, MineFragment.class)
                 .isShowDivider(false);
 

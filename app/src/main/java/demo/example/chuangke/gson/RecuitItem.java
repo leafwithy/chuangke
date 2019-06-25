@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class RecuitItem implements Serializable {
 
-    private String uid;
+    private int uid;
     private int rid;
     private String intro;
     private String demand;
@@ -13,11 +13,11 @@ public class RecuitItem implements Serializable {
     private int concern_sum;
     private String time;
 
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 
